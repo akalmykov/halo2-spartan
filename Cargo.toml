@@ -24,8 +24,19 @@ halo2-base = { git = "https://github.com/axiom-crypto/halo2-lib", branch = "comm
 poseidon = { git = "https://github.com/axiom-crypto/halo2-lib", branch = "community-edition" }
 # Axiom Evm wrapper 
 # These are just for making proving executables, if you are just building a library you don't need them as dependencies in your project
-axiom-eth = { git = "https://github.com/axiom-crypto/axiom-eth.git", branch = "community-edition", default-features = false, features = ["halo2-axiom", "aggregation", "evm", "clap"] }
-snark-verifier-sdk = { git = "https://github.com/axiom-crypto/snark-verifier.git", branch = "community-edition", default-features = false, features = ["loader_halo2"] }
+axiom-eth = { git = "https://github.com/axiom-crypto/axiom-eth.git", branch = "community-edition", default-features = false, features = [
+  "halo2-axiom",
+  "aggregation",
+  "evm",
+  "clap",
+] }
+snark-verifier-sdk = { git = "https://github.com/axiom-crypto/snark-verifier.git", branch = "community-edition", default-features = false, features = [
+  "loader_halo2",
+] }
+
+spartan2 = { path = "../Spartan2" }
+pasta_curves = { version = "0.5", features = ["repr-c", "serde"] }
+bellperson = { version = "0.25", default-features = false }
 
 [dev-dependencies]
 test-log = "0.2.11"
@@ -37,9 +48,9 @@ default = []
 # Dev / testing mode. We make opt-level = 3 to improve proving times (otherwise it is really slow)
 [profile.dev]
 opt-level = 3
-debug = 1 # change to 0 or 2 for more or less debug info
+debug = 1              # change to 0 or 2 for more or less debug info
 overflow-checks = true # default
-incremental = true # default
+incremental = true     # default
 
 # Local "release" mode, more optimized than dev but faster to compile than release
 [profile.local]
